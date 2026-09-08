@@ -1,0 +1,15 @@
+{
+  "name": "Jane Doe",
+  "email": "jane@example.com",
+  "target_titles": {
+    "primary": ["Solutions Engineer", "Implementation Engineer", "Customer Engineer"],
+    "secondary": ["Solutions Architect", "Technical Account Manager", "Sales Engineer"],
+    "tertiary": ["Software Engineer"]
+  },
+  "locations": ["New York", "Remote"],
+  "us_only": true,
+  "needs_sponsorship": true,
+  "years_experience": 3,
+  "follow_up_days": 7,
+  "created_at": "2026-01-01T00:00:00.000Z"
+}

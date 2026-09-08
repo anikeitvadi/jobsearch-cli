@@ -1,0 +1,37 @@
+{
+  "name": "jobsearch-cli",
+  "version": "1.1.0",
+  "description": "CLI job search assistant: scrapes Greenhouse, Lever, and Ashby boards for the roles in your profile and tracks your pipeline",
+  "main": "dist/cli.js",
+  "bin": {
+    "jobsearch": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "tsx src/cli.ts",
+    "init": "tsx src/cli.ts init",
+    "check": "tsx src/cli.ts check",
+    "pipeline": "tsx src/cli.ts pipeline",
+    "companies": "tsx src/cli.ts companies",
+    "followups": "tsx src/cli.ts followups",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": ["job-search", "cli", "greenhouse", "lever", "ashby"],
+  "license": "ISC",
+  "dependencies": {
+    "better-sqlite3": "^12.6.2",
+    "chalk": "^5.6.2",
+    "cheerio": "^1.2.0",
+    "commander": "^14.0.3",
+    "node-fetch": "^2.7.0",
+    "ora": "^9.1.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/cheerio": "^1.0.0",
+    "@types/node": "^25.2.0",
+    "@types/node-fetch": "^2.6.13"
+  }
+}

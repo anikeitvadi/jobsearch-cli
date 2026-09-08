@@ -1,0 +1,951 @@
+{
+  "companies": [
+    {
+      "name": "Workato",
+      "category": "iPaaS",
+      "h1b_friendly": true,
+      "greenhouse_id": "workato",
+      "email_pattern": "{first}.{last}@workato.com"
+    },
+    {
+      "name": "Boomi",
+      "category": "iPaaS",
+      "h1b_friendly": true,
+      "greenhouse_id": "boaboratories",
+      "email_pattern": "{first}.{last}@boomi.com"
+    },
+    {
+      "name": "Celigo",
+      "category": "iPaaS",
+      "h1b_friendly": true,
+      "greenhouse_id": "celigo",
+      "email_pattern": "{first}.{last}@celigo.com"
+    },
+    {
+      "name": "SnapLogic",
+      "category": "iPaaS",
+      "h1b_friendly": true,
+      "greenhouse_id": "snaplogic",
+      "email_pattern": "{first}.{last}@snaplogic.com"
+    },
+    {
+      "name": "Tray.io",
+      "category": "iPaaS",
+      "h1b_friendly": true,
+      "greenhouse_id": "trayio",
+      "email_pattern": "{first}.{last}@tray.io"
+    },
+    {
+      "name": "Merge",
+      "category": "Data Infrastructure",
+      "h1b_friendly": true,
+      "greenhouse_id": "merge"
+    },
+    {
+      "name": "Airbyte",
+      "category": "Data Infrastructure",
+      "h1b_friendly": true,
+      "greenhouse_id": "airbyte"
+    },
+    {
+      "name": "Fivetran",
+      "category": "Data Infrastructure",
+      "h1b_friendly": true,
+      "greenhouse_id": "fivetran"
+    },
+    {
+      "name": "dbt Labs",
+      "category": "Data Infrastructure",
+      "h1b_friendly": true,
+      "greenhouse_id": "dbtlabsinc"
+    },
+    {
+      "name": "Hightouch",
+      "category": "Data Infrastructure",
+      "h1b_friendly": true,
+      "greenhouse_id": "hightouch"
+    },
+    {
+      "name": "Amperity",
+      "category": "Data Infrastructure",
+      "h1b_friendly": true,
+      "greenhouse_id": "amperity"
+    },
+    {
+      "name": "Flatfile",
+      "category": "Data Infrastructure",
+      "h1b_friendly": true,
+      "lever_id": "flatfile"
+    },
+    {
+      "name": "Alloy Automation",
+      "category": "Data Infrastructure",
+      "h1b_friendly": true,
+      "lever_id": "run-alloy"
+    },
+    {
+      "name": "Superblocks",
+      "category": "Developer Tools",
+      "h1b_friendly": true,
+      "greenhouse_id": "superblocks"
+    },
+    {
+      "name": "Retool",
+      "category": "Developer Tools",
+      "h1b_friendly": true,
+      "greenhouse_id": "retool"
+    },
+    {
+      "name": "Temporal",
+      "category": "Developer Tools",
+      "h1b_friendly": true,
+      "greenhouse_id": "temporaltechnologies"
+    },
+    {
+      "name": "Vercel",
+      "category": "Developer Tools",
+      "h1b_friendly": true,
+      "greenhouse_id": "vercel"
+    },
+    {
+      "name": "Webflow",
+      "category": "Developer Tools",
+      "h1b_friendly": true,
+      "greenhouse_id": "webflow"
+    },
+    {
+      "name": "Airtable",
+      "category": "Developer Tools",
+      "h1b_friendly": true,
+      "greenhouse_id": "airtable"
+    },
+    {
+      "name": "Figma",
+      "category": "Developer Tools",
+      "h1b_friendly": true,
+      "greenhouse_id": "figma"
+    },
+    {
+      "name": "GitLab",
+      "category": "Developer Tools",
+      "h1b_friendly": true,
+      "greenhouse_id": "gitlab"
+    },
+    {
+      "name": "Contentful",
+      "category": "Developer Tools",
+      "h1b_friendly": true,
+      "greenhouse_id": "contentful"
+    },
+    {
+      "name": "Box",
+      "category": "Developer Tools",
+      "h1b_friendly": true,
+      "greenhouse_id": "boxinc"
+    },
+    {
+      "name": "Coda",
+      "category": "Developer Tools",
+      "h1b_friendly": true,
+      "lever_id": "Coda"
+    },
+    {
+      "name": "WorkOS",
+      "category": "Developer Tools",
+      "h1b_friendly": true,
+      "lever_id": "workos"
+    },
+    {
+      "name": "Netlify",
+      "category": "Developer Tools",
+      "h1b_friendly": true,
+      "greenhouse_id": "netlify"
+    },
+    {
+      "name": "JFrog",
+      "category": "Developer Tools",
+      "h1b_friendly": true,
+      "greenhouse_id": "jfrog"
+    },
+    {
+      "name": "Harness",
+      "category": "Developer Tools",
+      "h1b_friendly": true,
+      "greenhouse_id": "harnessinc"
+    },
+    {
+      "name": "Pulumi",
+      "category": "Developer Tools",
+      "h1b_friendly": true,
+      "greenhouse_id": "pulumicorporation"
+    },
+    {
+      "name": "Supabase",
+      "category": "Developer Tools",
+      "h1b_friendly": true,
+      "ashby_id": "supabase"
+    },
+    {
+      "name": "Linear",
+      "category": "Developer Tools",
+      "h1b_friendly": true,
+      "ashby_id": "Linear"
+    },
+    {
+      "name": "Notion",
+      "category": "Developer Tools",
+      "h1b_friendly": true,
+      "ashby_id": "notion"
+    },
+    {
+      "name": "PostHog",
+      "category": "Developer Tools",
+      "h1b_friendly": true,
+      "ashby_id": "posthog"
+    },
+    {
+      "name": "Stytch",
+      "category": "Developer Tools",
+      "h1b_friendly": true,
+      "ashby_id": "stytch"
+    },
+    {
+      "name": "Clerk",
+      "category": "Developer Tools",
+      "h1b_friendly": true,
+      "ashby_id": "clerk"
+    },
+    {
+      "name": "Ashby",
+      "category": "Developer Tools",
+      "h1b_friendly": true,
+      "ashby_id": "ashby"
+    },
+    {
+      "name": "Synthesia",
+      "category": "AI Startup",
+      "h1b_friendly": true,
+      "greenhouse_id": "synthesia"
+    },
+    {
+      "name": "Intercom",
+      "category": "AI Startup",
+      "h1b_friendly": true,
+      "greenhouse_id": "intercom"
+    },
+    {
+      "name": "Ada",
+      "category": "AI Startup",
+      "h1b_friendly": true,
+      "greenhouse_id": "ada18"
+    },
+    {
+      "name": "Forethought",
+      "category": "AI Startup",
+      "h1b_friendly": true,
+      "greenhouse_id": "forethought"
+    },
+    {
+      "name": "LivePerson",
+      "category": "AI Startup",
+      "h1b_friendly": true,
+      "greenhouse_id": "liveperson"
+    },
+    {
+      "name": "Gong",
+      "category": "AI Startup",
+      "h1b_friendly": true,
+      "greenhouse_id": "gongio"
+    },
+    {
+      "name": "Grammarly",
+      "category": "AI Startup",
+      "h1b_friendly": true,
+      "greenhouse_id": "grammarly"
+    },
+    {
+      "name": "Otter.ai",
+      "category": "AI Startup",
+      "h1b_friendly": true,
+      "greenhouse_id": "otterai"
+    },
+    {
+      "name": "Descript",
+      "category": "AI Startup",
+      "h1b_friendly": true,
+      "greenhouse_id": "descript"
+    },
+    {
+      "name": "Gladly",
+      "category": "AI Startup",
+      "h1b_friendly": true,
+      "greenhouse_id": "sagansystems"
+    },
+    {
+      "name": "Attio",
+      "category": "AI Startup",
+      "h1b_friendly": true,
+      "ashby_id": "attio"
+    },
+    {
+      "name": "Sierra AI",
+      "category": "AI Startup",
+      "h1b_friendly": true,
+      "ashby_id": "Sierra"
+    },
+    {
+      "name": "Decagon",
+      "category": "AI Startup",
+      "h1b_friendly": true,
+      "ashby_id": "decagon"
+    },
+    {
+      "name": "Gorgias",
+      "category": "AI Startup",
+      "h1b_friendly": true,
+      "ashby_id": "gorgias"
+    },
+    {
+      "name": "Writer",
+      "category": "AI Startup",
+      "h1b_friendly": true,
+      "ashby_id": "writer"
+    },
+    {
+      "name": "Anthropic",
+      "category": "AI Startup",
+      "h1b_friendly": true,
+      "greenhouse_id": "anthropic"
+    },
+    {
+      "name": "OpenAI",
+      "category": "AI Startup",
+      "h1b_friendly": true,
+      "greenhouse_id": "openai"
+    },
+    {
+      "name": "Cohere",
+      "category": "AI Startup",
+      "h1b_friendly": true,
+      "greenhouse_id": "cohere"
+    },
+    {
+      "name": "Scale AI",
+      "category": "AI Startup",
+      "h1b_friendly": true,
+      "greenhouse_id": "scaleai"
+    },
+    {
+      "name": "Glean",
+      "category": "AI Startup",
+      "h1b_friendly": true,
+      "greenhouse_id": "glaboratn"
+    },
+    {
+      "name": "Rithum",
+      "category": "Commerce",
+      "h1b_friendly": true,
+      "greenhouse_id": "rithum"
+    },
+    {
+      "name": "Iterable",
+      "category": "Commerce",
+      "h1b_friendly": true,
+      "greenhouse_id": "iterable"
+    },
+    {
+      "name": "Bloomreach",
+      "category": "Commerce",
+      "h1b_friendly": true,
+      "greenhouse_id": "bloomreach"
+    },
+    {
+      "name": "Apollo.io",
+      "category": "Commerce",
+      "h1b_friendly": true,
+      "greenhouse_id": "apolloio"
+    },
+    {
+      "name": "Braze",
+      "category": "Marketing Tech",
+      "h1b_friendly": true,
+      "greenhouse_id": "braze"
+    },
+    {
+      "name": "Customer.io",
+      "category": "Marketing Tech",
+      "h1b_friendly": true,
+      "greenhouse_id": "customerio"
+    },
+    {
+      "name": "Klaviyo",
+      "category": "Marketing Tech",
+      "h1b_friendly": true,
+      "greenhouse_id": "klaviyo"
+    },
+    {
+      "name": "Postscript",
+      "category": "Marketing Tech",
+      "h1b_friendly": true,
+      "greenhouse_id": "postscript"
+    },
+    {
+      "name": "6sense",
+      "category": "Marketing Tech",
+      "h1b_friendly": true,
+      "greenhouse_id": "6sense"
+    },
+    {
+      "name": "Demandbase",
+      "category": "Marketing Tech",
+      "h1b_friendly": true,
+      "greenhouse_id": "demandbase"
+    },
+    {
+      "name": "Mutiny",
+      "category": "Marketing Tech",
+      "h1b_friendly": true,
+      "greenhouse_id": "mutinyjobs"
+    },
+    {
+      "name": "Salesloft",
+      "category": "Sales Tech",
+      "h1b_friendly": true,
+      "greenhouse_id": "salesloft"
+    },
+    {
+      "name": "Clari",
+      "category": "Sales Tech",
+      "h1b_friendly": true,
+      "lever_id": "clari"
+    },
+    {
+      "name": "Outreach",
+      "category": "Sales Tech",
+      "h1b_friendly": true,
+      "lever_id": "outreach"
+    },
+    {
+      "name": "Drift",
+      "category": "Sales Tech",
+      "h1b_friendly": true,
+      "greenhouse_id": "drift"
+    },
+    {
+      "name": "Ramp",
+      "category": "Fintech",
+      "h1b_friendly": true,
+      "ashby_id": "ramp"
+    },
+    {
+      "name": "Brex",
+      "category": "Fintech",
+      "h1b_friendly": true,
+      "greenhouse_id": "brex"
+    },
+    {
+      "name": "Mercury",
+      "category": "Fintech",
+      "h1b_friendly": true,
+      "greenhouse_id": "mercury"
+    },
+    {
+      "name": "Stripe",
+      "category": "Fintech",
+      "h1b_friendly": true,
+      "greenhouse_id": "stripe"
+    },
+    {
+      "name": "Plaid",
+      "category": "Fintech",
+      "h1b_friendly": true,
+      "greenhouse_id": "plaid"
+    },
+    {
+      "name": "Carta",
+      "category": "Fintech",
+      "h1b_friendly": true,
+      "greenhouse_id": "carta"
+    },
+    {
+      "name": "Pulley",
+      "category": "Fintech",
+      "h1b_friendly": true,
+      "greenhouse_id": "pulley"
+    },
+    {
+      "name": "Paddle",
+      "category": "Fintech",
+      "h1b_friendly": true,
+      "greenhouse_id": "paddle"
+    },
+    {
+      "name": "Zuora",
+      "category": "Fintech",
+      "h1b_friendly": true,
+      "greenhouse_id": "zuora"
+    },
+    {
+      "name": "Metronome",
+      "category": "Fintech",
+      "h1b_friendly": true,
+      "greenhouse_id": "metronome"
+    },
+    {
+      "name": "Recurly",
+      "category": "Fintech",
+      "h1b_friendly": true,
+      "lever_id": "recurly"
+    },
+    {
+      "name": "AngelList",
+      "category": "Fintech",
+      "h1b_friendly": true,
+      "lever_id": "angellist"
+    },
+    {
+      "name": "Coupa",
+      "category": "Fintech",
+      "h1b_friendly": true,
+      "lever_id": "coupa"
+    },
+    {
+      "name": "Orb",
+      "category": "Fintech",
+      "h1b_friendly": true,
+      "ashby_id": "orb"
+    },
+    {
+      "name": "Capchase",
+      "category": "Fintech",
+      "h1b_friendly": true,
+      "ashby_id": "capchase"
+    },
+    {
+      "name": "Gusto",
+      "category": "HR Tech",
+      "h1b_friendly": true,
+      "greenhouse_id": "gusto"
+    },
+    {
+      "name": "Lattice",
+      "category": "HR Tech",
+      "h1b_friendly": true,
+      "greenhouse_id": "lattice"
+    },
+    {
+      "name": "BambooHR",
+      "category": "HR Tech",
+      "h1b_friendly": true,
+      "greenhouse_id": "bamboohr17"
+    },
+    {
+      "name": "Remote.com",
+      "category": "HR Tech",
+      "h1b_friendly": true,
+      "greenhouse_id": "remotecom"
+    },
+    {
+      "name": "Papaya Global",
+      "category": "HR Tech",
+      "h1b_friendly": true,
+      "greenhouse_id": "papaya"
+    },
+    {
+      "name": "Karat",
+      "category": "HR Tech",
+      "h1b_friendly": true,
+      "greenhouse_id": "karat"
+    },
+    {
+      "name": "Deel",
+      "category": "HR Tech",
+      "h1b_friendly": true,
+      "ashby_id": "deel"
+    },
+    {
+      "name": "Ironclad",
+      "category": "Legal Tech",
+      "h1b_friendly": true,
+      "ashby_id": "ironcladhq"
+    },
+    {
+      "name": "BuildOps",
+      "category": "Construction Tech",
+      "h1b_friendly": true,
+      "greenhouse_id": "buildops"
+    },
+    {
+      "name": "Fieldwire",
+      "category": "Construction Tech",
+      "h1b_friendly": true,
+      "greenhouse_id": "fieldwire"
+    },
+    {
+      "name": "Assembled",
+      "category": "Workforce",
+      "h1b_friendly": true,
+      "greenhouse_id": "assembled"
+    },
+    {
+      "name": "Perchwell",
+      "category": "Real Estate Tech",
+      "h1b_friendly": true,
+      "ashby_id": "Perchwell"
+    },
+    {
+      "name": "Polymarket",
+      "category": "Crypto",
+      "h1b_friendly": true,
+      "ashby_id": "polymarket"
+    },
+    {
+      "name": "Vanta",
+      "category": "Security",
+      "h1b_friendly": true,
+      "ashby_id": "vanta"
+    },
+    {
+      "name": "Drata",
+      "category": "Security",
+      "h1b_friendly": true,
+      "ashby_id": "drata"
+    },
+    {
+      "name": "Snyk",
+      "category": "Security",
+      "h1b_friendly": true,
+      "greenhouse_id": "snyk"
+    },
+    {
+      "name": "LaunchDarkly",
+      "category": "Security",
+      "h1b_friendly": true,
+      "lever_id": "launchdarkly"
+    },
+    {
+      "name": "Datadog",
+      "category": "Enterprise SaaS",
+      "h1b_friendly": true,
+      "greenhouse_id": "datadog"
+    },
+    {
+      "name": "Snowflake",
+      "category": "Enterprise SaaS",
+      "h1b_friendly": true,
+      "greenhouse_id": "snowflakecomputing"
+    },
+    {
+      "name": "Databricks",
+      "category": "Enterprise SaaS",
+      "h1b_friendly": true,
+      "greenhouse_id": "databricks"
+    },
+    {
+      "name": "MongoDB",
+      "category": "Enterprise SaaS",
+      "h1b_friendly": true,
+      "greenhouse_id": "mongodb"
+    },
+    {
+      "name": "Confluent",
+      "category": "Enterprise SaaS",
+      "h1b_friendly": true,
+      "greenhouse_id": "confluent"
+    },
+    {
+      "name": "HashiCorp",
+      "category": "Enterprise SaaS",
+      "h1b_friendly": true,
+      "greenhouse_id": "hashicorp"
+    },
+    {
+      "name": "Twilio",
+      "category": "Enterprise SaaS",
+      "h1b_friendly": true,
+      "greenhouse_id": "twilio"
+    },
+    {
+      "name": "Okta",
+      "category": "Enterprise SaaS",
+      "h1b_friendly": true,
+      "greenhouse_id": "okta"
+    },
+    {
+      "name": "HubSpot",
+      "category": "Enterprise SaaS",
+      "h1b_friendly": true,
+      "greenhouse_id": "hubspot"
+    },
+    {
+      "name": "Atlassian",
+      "category": "Enterprise SaaS",
+      "h1b_friendly": true,
+      "greenhouse_id": "atlassian"
+    },
+    {
+      "name": "Elastic",
+      "category": "Enterprise SaaS",
+      "h1b_friendly": true,
+      "greenhouse_id": "elastic"
+    },
+    {
+      "name": "Cloudflare",
+      "category": "Enterprise SaaS",
+      "h1b_friendly": true,
+      "greenhouse_id": "cloudflare"
+    },
+    {
+      "name": "DocuSign",
+      "category": "Enterprise SaaS",
+      "h1b_friendly": true,
+      "greenhouse_id": "docusign"
+    },
+    {
+      "name": "Asana",
+      "category": "Enterprise SaaS",
+      "h1b_friendly": true,
+      "greenhouse_id": "asana"
+    },
+    {
+      "name": "ClickUp",
+      "category": "Enterprise SaaS",
+      "h1b_friendly": true,
+      "greenhouse_id": "clickup"
+    },
+    {
+      "name": "Wrike",
+      "category": "Enterprise SaaS",
+      "h1b_friendly": true,
+      "greenhouse_id": "wrike"
+    },
+    {
+      "name": "Smartsheet",
+      "category": "Enterprise SaaS",
+      "h1b_friendly": true,
+      "greenhouse_id": "smartsheet"
+    },
+    {
+      "name": "LogicMonitor",
+      "category": "Observability",
+      "h1b_friendly": true,
+      "greenhouse_id": "logicmonitor"
+    },
+    {
+      "name": "Mezmo",
+      "category": "Observability",
+      "h1b_friendly": true,
+      "greenhouse_id": "mezmo"
+    },
+    {
+      "name": "Cribl",
+      "category": "Observability",
+      "h1b_friendly": true,
+      "greenhouse_id": "cribl"
+    },
+    {
+      "name": "Honeycomb",
+      "category": "Observability",
+      "h1b_friendly": true,
+      "greenhouse_id": "honeycomb"
+    },
+    {
+      "name": "Grafana Labs",
+      "category": "Observability",
+      "h1b_friendly": true,
+      "greenhouse_id": "grafanalabs"
+    },
+    {
+      "name": "Chronosphere",
+      "category": "Observability",
+      "h1b_friendly": true,
+      "ashby_id": "chronospherejobs"
+    },
+    {
+      "name": "Amplitude",
+      "category": "Product Analytics",
+      "h1b_friendly": true,
+      "greenhouse_id": "amplitude"
+    },
+    {
+      "name": "Mixpanel",
+      "category": "Product Analytics",
+      "h1b_friendly": true,
+      "greenhouse_id": "mixpanel"
+    },
+    {
+      "name": "FullStory",
+      "category": "Product Analytics",
+      "h1b_friendly": true,
+      "greenhouse_id": "fullstory"
+    },
+    {
+      "name": "Pendo",
+      "category": "Product Analytics",
+      "h1b_friendly": true,
+      "greenhouse_id": "pendo"
+    },
+    {
+      "name": "LogRocket",
+      "category": "Product Analytics",
+      "h1b_friendly": true,
+      "lever_id": "logrocket"
+    },
+    {
+      "name": "Coursera",
+      "category": "EdTech",
+      "h1b_friendly": true,
+      "greenhouse_id": "coursera"
+    },
+    {
+      "name": "Udemy",
+      "category": "EdTech",
+      "h1b_friendly": true,
+      "greenhouse_id": "udemy"
+    },
+    {
+      "name": "Intellum",
+      "category": "EdTech",
+      "h1b_friendly": true,
+      "greenhouse_id": "intelluminc"
+    },
+    {
+      "name": "Docebo",
+      "category": "EdTech",
+      "h1b_friendly": true,
+      "lever_id": "docebo"
+    },
+    {
+      "name": "Vonage",
+      "category": "Communications",
+      "h1b_friendly": true,
+      "greenhouse_id": "vonage"
+    },
+    {
+      "name": "Bandwidth",
+      "category": "Communications",
+      "h1b_friendly": true,
+      "greenhouse_id": "bandwidth"
+    },
+    {
+      "name": "Telnyx",
+      "category": "Communications",
+      "h1b_friendly": true,
+      "greenhouse_id": "telnyx54"
+    },
+    {
+      "name": "Sendbird",
+      "category": "Communications",
+      "h1b_friendly": true,
+      "greenhouse_id": "sendbird"
+    },
+    {
+      "name": "Plivo",
+      "category": "Communications",
+      "h1b_friendly": true,
+      "lever_id": "plivo"
+    },
+    {
+      "name": "Aircall",
+      "category": "Communications",
+      "h1b_friendly": true,
+      "lever_id": "aircall"
+    },
+    {
+      "name": "Talkdesk",
+      "category": "Contact Center",
+      "h1b_friendly": true,
+      "ashby_id": "talkdesk"
+    },
+    {
+      "name": "Five9",
+      "category": "Contact Center",
+      "h1b_friendly": true,
+      "greenhouse_id": "five9"
+    },
+    {
+      "name": "Dialpad",
+      "category": "Contact Center",
+      "h1b_friendly": true,
+      "greenhouse_id": "dialpad"
+    },
+    {
+      "name": "Catalyst",
+      "category": "Customer Success",
+      "h1b_friendly": true,
+      "greenhouse_id": "catalystopenroles"
+    },
+    {
+      "name": "Knock",
+      "category": "Notifications",
+      "h1b_friendly": true,
+      "ashby_id": "knock"
+    },
+    {
+      "name": "Render",
+      "category": "Cloud Infrastructure",
+      "h1b_friendly": true,
+      "ashby_id": "render"
+    },
+    {
+      "name": "Fuel Cycle",
+      "category": "Market Research",
+      "h1b_friendly": true,
+      "ashby_id": "Fuel-Cycle"
+    },
+    {
+      "name": "Turing",
+      "category": "Talent",
+      "h1b_friendly": true,
+      "greenhouse_id": "turing"
+    },
+    {
+      "name": "Andela",
+      "category": "Talent",
+      "h1b_friendly": true,
+      "greenhouse_id": "andelainternal"
+    },
+    {
+      "name": "SafetyCulture",
+      "category": "Operations",
+      "h1b_friendly": true,
+      "lever_id": "safetyculture-2"
+    },
+    {
+      "name": "QuotaPath",
+      "category": "Sales Tech",
+      "h1b_friendly": true,
+      "lever_id": "quotapath"
+    },
+    {
+      "name": "Parloa",
+      "category": "AI Startup",
+      "h1b_friendly": true,
+      "greenhouse_id": "parloa"
+    },
+    {
+      "name": "Palo Alto Networks",
+      "category": "Security",
+      "h1b_friendly": true,
+      "greenhouse_id": "paloaltonetworks"
+    },
+    {
+      "name": "CrowdStrike",
+      "category": "Security",
+      "h1b_friendly": true,
+      "greenhouse_id": "crowdstrike"
+    },
+    {
+      "name": "Zscaler",
+      "category": "Security",
+      "h1b_friendly": true,
+      "greenhouse_id": "zscaler"
+    },
+    {
+      "name": "Forus",
+      "category": "AI Startup",
+      "h1b_friendly": true,
+      "ashby_id": "forus"
+    }
+  ]
+}
