@@ -7,7 +7,7 @@ dist/
 .env
 *.log
 data/profile.json
-HANDOFF.md
+/HANDOFF.md
 research/
 outreach/
 applications/
