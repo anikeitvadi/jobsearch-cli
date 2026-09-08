@@ -6,11 +6,11 @@ This is the loop. The CLI does the mechanical parts. You do the reading and the 
 
 `npm install`, then `npx tsx src/cli.ts init`. Answer in plain words, the way you'd talk to a friend. The proof points matter most: one outcome each, with a number in it. Every message the tool drafts is built from them.
 
-Edit `data/companies.json` to add the companies you actually want. Board ids are in the careers URL (`boards.greenhouse.io/<id>`, `jobs.lever.co/<id>`, `jobs.ashbyhq.com/<id>`). Or use `jobsearch add-company`.
+Add the companies you actually want with `jobsearch find-board "Company Name"`. It guesses the Greenhouse, Lever, or Ashby slug and tracks the one that answers. If it can't find one, the careers page tells you the slug (`boards.greenhouse.io/<id>`, `jobs.lever.co/<id>`, `jobs.ashbyhq.com/<id>`) and `--slug` takes it.
 
 ## 1. Find (daily, 10 minutes)
 
-`jobsearch check`. It scores every new posting against your titles and pins the ones in your preferred locations.
+`jobsearch check` pulls new postings and scores them against your titles. `jobsearch jobs` is everything stored, best first. `jobsearch show <id>` prints one with the lines that read like the bar pulled out. `jobsearch skip <id>` drops the ones you won't do.
 
 Then read the posting. The whole thing, line by line. Match yourself against the minimum qualifications honestly. A title is not the job. Two rules:
 
@@ -19,7 +19,7 @@ Then read the posting. The whole thing, line by line. Match yourself against the
 
 ## 2. Apply (same day)
 
-Resume of record, no tailoring unless the form asks a question. Short answers: what you did, one number, done. Log it: `jobsearch apply "<company>" "<role>"`.
+Resume of record, no tailoring unless the form asks a question. Short answers: what you did, one number, done. Log it: `jobsearch apply --job <id>` (or `apply "<company>" "<role>"`).
 
 ## 3. Reach out (same day, 3 to 6 people, all verified)
 

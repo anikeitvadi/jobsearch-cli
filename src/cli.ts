@@ -10,6 +10,7 @@ import { fetchGreenhouseJobs } from './scrapers/greenhouse';
 import { fetchLeverJobs } from './scrapers/lever';
 import { fetchAshbyJobs } from './scrapers/ashby';
 import { generateEmailGuesses, extractDomain } from './email/patterns';
+import { htmlToText, qualificationLines } from './text';
 import { Profile, ensureProfile, loadProfile, profileExists, runOnboarding, printProfile } from './profile';
 import { TitleSet } from './presets';
 import {
@@ -132,7 +133,7 @@ async function fetchAllBoards(company: Company): Promise<{ source: string; jobs:
           title: j.title,
           location: j.location || 'Unknown',
           url: j.jobUrl,
-          description: '',
+          description: j.descriptionPlain || '',
           posted_at: j.updatedAt || new Date().toISOString(),
         })),
       });
@@ -269,7 +270,7 @@ program
     });
 
     const total = db.prepare('SELECT COUNT(*) as count FROM jobs').get() as { count: number };
-    console.log(chalk.gray(`Total jobs tracked: ${total.count}`));
+    console.log(chalk.gray(`Total jobs tracked: ${total.count}. Everything stored: \`jobsearch jobs\`. Read one: \`jobsearch show <id>\`.`));
     if (skippedForSponsorship > 0) {
       console.log(chalk.gray(`Skipped ${skippedForSponsorship} companies flagged as not sponsoring (use --all to include).`));
     }
@@ -407,26 +408,231 @@ program
     console.log(chalk.gray('\nVerify on LinkedIn before sending. A guessed email is a guess.'));
   });
 
+// ---------- stored jobs ----------
+
+interface JobRow {
+  id: number;
+  company: string;
+  title: string;
+  location: string;
+  url: string;
+  description: string;
+  posted_at: string;
+  discovered_at: string;
+  match_score: number;
+  status: string;
+}
+
+program
+  .command('jobs')
+  .description('Stored matches from every check, best first (ids feed show / skip / apply --job)')
+  .option('-c, --company <name>', 'One company')
+  .option('-l, --limit <number>', 'Max rows', '30')
+  .option('-m, --min-score <score>', 'Minimum score (1.0 primary, 0.6 secondary, 0.3 tertiary)', '0.3')
+  .option('--all', 'Include skipped and applied')
+  .option('--anywhere', 'Include non-US locations')
+  .action((options) => {
+    const profile = loadProfile();
+    const db = getDb();
+    const where: string[] = ['match_score >= ?'];
+    const params: (string | number)[] = [parseFloat(options.minScore)];
+    if (!options.all) where.push("status = 'new'");
+    if (options.company) {
+      where.push('company LIKE ?');
+      params.push(`%${options.company}%`);
+    }
+    const rows = db
+      .prepare(`SELECT * FROM jobs WHERE ${where.join(' AND ')} ORDER BY match_score DESC, discovered_at DESC`)
+      .all(...params) as JobRow[];
+    const usOnly = options.anywhere ? false : profile.us_only;
+    const filtered = rows.filter((r) => !usOnly || isUsLocation(r.location || ''));
+    const shown = filtered.slice(0, parseInt(options.limit, 10));
+
+    header(`${filtered.length} STORED MATCHES${options.all ? '' : ' (unapplied)'}`);
+    if (!shown.length) {
+      console.log(chalk.gray('Nothing stored yet. Run `jobsearch check`.'));
+      return;
+    }
+    for (const r of shown) {
+      const scoreColor = r.match_score >= 0.9 ? chalk.green : r.match_score >= 0.5 ? chalk.yellow : chalk.gray;
+      const pin = matchesPreferredLocation(r.location || '', profile.locations) ? chalk.green(' ◆') : '';
+      const st = r.status === 'new' ? '' : chalk.gray(` [${r.status}]`);
+      console.log(`${chalk.gray(String(r.id).padStart(5))}  ${chalk.bold(r.title)} — ${chalk.cyan(r.company)}${st}`);
+      console.log(`       ${chalk.gray(r.location || 'Unknown')}${pin}  ${scoreColor(String(r.match_score))}  ${chalk.blue(r.url)}`);
+    }
+    if (filtered.length > shown.length) console.log(chalk.gray(`\n...and ${filtered.length - shown.length} more (-l to show more).`));
+    console.log(chalk.gray('\nshow <id> to read one · skip <id> to drop it · apply --job <id> when you submit'));
+  });
+
+program
+  .command('show <id>')
+  .description('Read a stored posting and pull out the qualification lines')
+  .option('--full', 'Print the whole description')
+  .action((id, options) => {
+    const db = getDb();
+    const r = db.prepare('SELECT * FROM jobs WHERE id = ?').get(parseInt(id, 10)) as JobRow | undefined;
+    if (!r) {
+      console.log(chalk.red(`No job with id ${id}. See \`jobsearch jobs\`.`));
+      return;
+    }
+    header(`${r.title} — ${r.company}`);
+    console.log(`${chalk.gray('location')}  ${r.location || 'Unknown'}`);
+    console.log(`${chalk.gray('score')}     ${r.match_score}   ${chalk.gray('status')} ${r.status}`);
+    console.log(`${chalk.gray('posted')}    ${r.posted_at ? new Date(r.posted_at).toLocaleDateString() : 'unknown'}`);
+    console.log(`${chalk.gray('url')}       ${chalk.blue(r.url)}`);
+
+    const text = htmlToText(r.description || '');
+    if (!text) {
+      console.log(chalk.yellow('\nNo description stored for this board. Open the URL and read it there.'));
+      return;
+    }
+    const quals = qualificationLines(text);
+    if (quals.length) {
+      console.log('\n' + chalk.bold.underline('Lines that read like the bar (match yourself against these honestly)'));
+      quals.forEach((q) => console.log(`  • ${q}`));
+    }
+    if (options.full) {
+      console.log('\n' + chalk.bold.underline('Full posting'));
+      console.log(text);
+    } else {
+      console.log(chalk.gray(`\n--full prints the whole posting (${text.length} chars).`));
+    }
+    console.log(chalk.gray(`\napply --job ${r.id}  ·  skip ${r.id}`));
+  });
+
+program
+  .command('skip <ids...>')
+  .description('Drop stored jobs you are not going to apply to')
+  .action((ids: string[]) => {
+    const db = getDb();
+    const stmt = db.prepare("UPDATE jobs SET status = 'skipped' WHERE id = ? AND status = 'new'");
+    let n = 0;
+    for (const id of ids) n += stmt.run(parseInt(id, 10)).changes;
+    console.log(n ? chalk.green(`✓ Skipped ${n} job(s)`) : chalk.yellow('Nothing changed (ids not found or not new).'));
+  });
+
+// ---------- board discovery ----------
+
+function slugCandidates(name: string, override?: string): string[] {
+  if (override) return [override];
+  const base = name.toLowerCase().trim();
+  const compact = base.replace(/[^a-z0-9]/g, '');
+  const hyphen = base.replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  const firstWord = base.split(/\s+/)[0].replace(/[^a-z0-9]/g, '');
+  const stripped = compact.replace(/(inc|labs|hq|ai|io|co|technologies|technology|corp)$/, '');
+  return [...new Set([compact, hyphen, firstWord, stripped, `${compact}ai`, `${compact}hq`].filter(Boolean))];
+}
+
+async function probeBoards(slug: string): Promise<{ greenhouse?: number; lever?: number; ashby?: number }> {
+  const out: { greenhouse?: number; lever?: number; ashby?: number } = {};
+  const get = async (url: string) => {
+    try {
+      const res = await fetch(url, { headers: { Accept: 'application/json', 'User-Agent': 'jobsearch-cli' } });
+      if (!res.ok) return null;
+      return (await res.json()) as unknown;
+    } catch {
+      return null;
+    }
+  };
+  const gh = (await get(`https://boards-api.greenhouse.io/v1/boards/${slug}/jobs`)) as { jobs?: unknown[] } | null;
+  if (gh && Array.isArray(gh.jobs)) out.greenhouse = gh.jobs.length;
+  const lv = (await get(`https://api.lever.co/v0/postings/${slug}?mode=json`)) as unknown[] | null;
+  if (Array.isArray(lv)) out.lever = lv.length;
+  const as = (await get(`https://api.ashbyhq.com/posting-api/job-board/${slug}`)) as { jobs?: unknown[] } | null;
+  if (as && Array.isArray(as.jobs)) out.ashby = as.jobs.length;
+  return out;
+}
+
+program
+  .command('find-board <company>')
+  .description('Detect a company\'s Greenhouse / Lever / Ashby board from its name and track it')
+  .option('--slug <slug>', 'Try this slug instead of guessing (the part after boards.greenhouse.io/, jobs.lever.co/, jobs.ashbyhq.com/)')
+  .option('--category <category>', 'Category label', 'Uncategorized')
+  .option('--no-sponsor', 'Flag as not sponsoring visas')
+  .option('--dry-run', 'Probe only, do not add')
+  .action(async (name: string, options) => {
+    const companies = loadCompanies();
+    const existing = companies.find((c) => c.name.toLowerCase() === name.toLowerCase());
+    const spinner = ora(`Probing boards for ${name}...`).start();
+    let found: { slug: string; boards: { greenhouse?: number; lever?: number; ashby?: number } } | null = null;
+    for (const slug of slugCandidates(name, options.slug)) {
+      spinner.text = `Trying ${slug}...`;
+      const boards = await probeBoards(slug);
+      if (boards.greenhouse !== undefined || boards.lever !== undefined || boards.ashby !== undefined) {
+        found = { slug, boards };
+        break;
+      }
+    }
+    spinner.stop();
+
+    if (!found) {
+      console.log(chalk.yellow(`No Greenhouse, Lever, or Ashby board answered for "${name}".`));
+      console.log(chalk.gray('Open their careers page: if the apply link goes to boards.greenhouse.io/X, jobs.lever.co/X, or jobs.ashbyhq.com/X, rerun with --slug X.'));
+      console.log(chalk.gray('Workday, SmartRecruiters, and custom sites are not supported; check those by hand.'));
+      return;
+    }
+    const { slug, boards } = found;
+    const parts = Object.entries(boards).map(([k, n]) => `${k} (${n} open)`);
+    console.log(chalk.green(`✓ ${name}: slug "${slug}" → ${parts.join(', ')}`));
+
+    if (options.dryRun) return;
+    if (existing) {
+      let changed = false;
+      if (boards.greenhouse !== undefined && !existing.greenhouse_id) (existing.greenhouse_id = slug), (changed = true);
+      if (boards.lever !== undefined && !existing.lever_id) (existing.lever_id = slug), (changed = true);
+      if (boards.ashby !== undefined && !existing.ashby_id) (existing.ashby_id = slug), (changed = true);
+      if (changed) {
+        saveCompanies(companies);
+        console.log(chalk.green(`✓ Updated ${existing.name} with the board id.`));
+      } else {
+        console.log(chalk.gray(`${existing.name} is already tracked with this board.`));
+      }
+      return;
+    }
+    const company: Company = { name, category: options.category, h1b_friendly: options.sponsor !== false };
+    if (boards.greenhouse !== undefined) company.greenhouse_id = slug;
+    if (boards.lever !== undefined) company.lever_id = slug;
+    if (boards.ashby !== undefined) company.ashby_id = slug;
+    companies.push(company);
+    saveCompanies(companies);
+    console.log(chalk.green(`✓ Added ${name}. Run \`jobsearch check -c "${name}"\`.`));
+  });
+
 // ---------- pipeline ----------
 
 const STATUSES = ['applied', 'responded', 'phone_screen', 'onsite', 'offer', 'rejected'];
 
 program
-  .command('apply <company> <role>')
-  .description('Log an application')
+  .command('apply [company] [role]')
+  .description('Log an application (by name, or by stored job id with --job)')
+  .option('-j, --job <id>', 'Stored job id from `jobsearch jobs`; fills company and role')
   .option('-n, --notes <notes>', 'Notes')
   .option('-r, --recruiter <name>', 'Recruiter or contact name')
   .option('-e, --email <email>', 'Their email')
-  .action((company, role, options) => {
+  .action((company: string | undefined, role: string | undefined, options) => {
     const profile = loadProfile();
     const db = getDb();
-    db.prepare(`INSERT INTO applications (company, title, notes, recruiter_name, recruiter_email) VALUES (?, ?, ?, ?, ?)`).run(
-      company,
-      role,
-      options.notes || null,
-      options.recruiter || null,
-      options.email || null
-    );
+    let jobId: number | null = null;
+    if (options.job) {
+      const j = db.prepare('SELECT id, company, title FROM jobs WHERE id = ?').get(parseInt(options.job, 10)) as
+        | { id: number; company: string; title: string }
+        | undefined;
+      if (!j) {
+        console.log(chalk.red(`No stored job with id ${options.job}.`));
+        return;
+      }
+      jobId = j.id;
+      company = company || j.company;
+      role = role || j.title;
+      db.prepare("UPDATE jobs SET status = 'applied' WHERE id = ?").run(j.id);
+    }
+    if (!company || !role) {
+      console.log(chalk.red('Give a company and role, or --job <id>.'));
+      return;
+    }
+    db.prepare(
+      `INSERT INTO applications (job_id, company, title, notes, recruiter_name, recruiter_email) VALUES (?, ?, ?, ?, ?, ?)`
+    ).run(jobId, company, role, options.notes || null, options.recruiter || null, options.email || null);
     const due = new Date();
     due.setDate(due.getDate() + profile.follow_up_days);
     console.log(chalk.green(`\n✓ Logged: ${role} @ ${company}`));

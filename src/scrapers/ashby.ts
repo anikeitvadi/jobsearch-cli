@@ -56,6 +56,7 @@ export async function fetchAshbyJobs(boardId: string): Promise<AshbyJob[]> {
       teamName: job.team,
       jobUrl: job.jobUrl,
       updatedAt: job.updatedAt,
+      descriptionPlain: job.descriptionPlain,
     }));
   } catch (error) {
     console.error(`Error fetching Ashby jobs for ${boardId}:`, error);
